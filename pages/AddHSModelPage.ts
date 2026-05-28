@@ -1,11 +1,12 @@
 import { Page, expect } from '@playwright/test';
 
-export class AddHSModel {
+
+export class AddHSModelPage {
 
     constructor(private page: Page) {}
 
     async verifyModalVisible() {
-        await expect(this.page.getByTitle('Add Hierarchical Set')).toBeVisible();
+        await expect(this.page.getByRole('heading', { name: 'Add Hierarchical Set' })).toBeVisible();
     }
 
     async fillName(name: string) {
@@ -30,4 +31,9 @@ export class AddHSModel {
     async verifyToastermsg() {
         await expect (this.page.getByText("added successfully")).toBeVisible();
     }
+
+    async verifyHScreated(hsName: string) {
+        await expect(this.page.getByRole('treeitem', { name: hsName })).toBeVisible();
+    }
+
 }

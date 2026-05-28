@@ -5,13 +5,16 @@ export default defineConfig({
 
   testDir: './tests',
 
+  fullyParallel: false,
+  workers: 1,
+
   expect: {
     timeout: 100000
   },
 
   forbidOnly: !!process.env.CI,
 
-  retries: 2,
+  //retries: 2,
 
   reporter: [
     ['html'],
@@ -39,7 +42,7 @@ export default defineConfig({
       },
       dependencies: ['setup']
     },
-
+/*
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
@@ -49,5 +52,6 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     }
+*/
   ]
 });

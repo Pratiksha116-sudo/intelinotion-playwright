@@ -4,7 +4,7 @@ import { generateHSName }from '../utils/commonUtils';
 
 test('Add Hierarchical Set',async ({
    infoModelPage,
-   addHSModel}) => {
+   addHSModelPage}) => {
 
    const hsName = generateHSName();
 
@@ -20,15 +20,17 @@ test('Add Hierarchical Set',async ({
 
    await infoModelPage.selectAddHS();
 
-   await addHSModel.verifyModalVisible();
+   await addHSModelPage.verifyModalVisible();
 
-   await addHSModel.fillName(hsName);
+   await addHSModelPage.fillName(hsName);
 
-   await addHSModel.selectComponentType(
+   await addHSModelPage.selectComponentType(
       'Marketing Component'
    );
 
-   await addHSModel.clickSave();
+   await addHSModelPage.clickSave();
 
-   await addHSModel.verifyToastermsg();
+   await addHSModelPage.verifyToastermsg();
+
+   await addHSModelPage.verifyHScreated(hsName);
 });

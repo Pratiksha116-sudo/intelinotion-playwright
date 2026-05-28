@@ -1,24 +1,30 @@
-import { test as base } from '@playwright/test';
+import { test as base, Page } from '@playwright/test';
 
 import { InfoModelPage } from '../pages/InfoModelPage';
-import { AddHSModel } from '../pages/AddHSModel';
+import { AddHSModelPage } from '../pages/AddHSModelPage';
+import { AddPlaceholder } from '../pages/addPlaceholdersPage';
 
 type PageFixtures = {
 
   infoModelPage: InfoModelPage;
-  addHSModel: AddHSModel;
+  addHSModelPage: AddHSModelPage;
+  addPlaceholderPage: AddPlaceholder;
 };
 
 export const test = base.extend<PageFixtures>({
 
-  infoModelPage: async ({ page }, use) => {
+  infoModelPage: async ({ page }: { page: Page }, use: (value: InfoModelPage) => Promise<void>) => {
 
     await use(new InfoModelPage(page));
   },
 
-  addHSModel: async ({ page }, use) => {
+  addHSModelPage: async ({ page }: { page: Page }, use: (value: AddHSModelPage) => Promise<void>) => {
 
-    await use(new AddHSModel(page));
+    await use(new AddHSModelPage(page));
+  },
+
+  addPlaceholderPage: async ({ page }: { page: Page }, use: (value: AddPlaceholder) => Promise<void>) => {
+    await use(new AddPlaceholder(page));
   }
 });
 
