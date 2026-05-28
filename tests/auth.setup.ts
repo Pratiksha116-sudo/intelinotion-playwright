@@ -1,22 +1,15 @@
 import { test as setup, expect } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
+import dotenv from 'dotenv';
 
-const authDir = 'auth';
-const authFile = path.join(authDir, 'user.json');
+dotenv.config();
 
 setup('authenticate', async ({ page }) => {
-
-  // create auth folder if missing
-  if (!fs.existsSync(authDir)) {
-    fs.mkdirSync(authDir, { recursive: true });
-  }
 
   await page.goto('/');
 
   await page
     .getByPlaceholder('Email, phone, or Skype')
-    .fill('QUALITYASSURANCE@intelinotiondev.onmicrosoft.com');
+    .fill(process.env.EMAIL!);
 
   await page.locator('#idSIButton9').click();
 
@@ -26,22 +19,20 @@ setup('authenticate', async ({ page }) => {
 
   await page
     .getByPlaceholder('Password')
-    .fill('1h3pXCdwixoWeqzR');
+    .fill(process.env.PASSWORD!);
 
   await page.locator('#idSIButton9').click();
 
   const staySignedInBtn = page.locator('#idSIButton9');
 
-  await expect(staySignedInBtn).toBeVisible();
+  if (await staySignedInBtn.isVisible().catch(() => false)) {
+    await staySignedInBtn.click();
+  }
 
-  await staySignedInBtn.click();
-
-  // wait until fully logged in
   await page.waitForLoadState('networkidle');
 
-  // save auth state
   await page.context().storageState({
-    path: authFile,
+    path: 'auth/user.json',
   });
 
 });
