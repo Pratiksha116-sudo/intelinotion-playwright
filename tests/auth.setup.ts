@@ -1,8 +1,15 @@
 import { test as setup, expect } from '@playwright/test';
 import dotenv from 'dotenv';
 
-dotenv.config();
+import path from 'path';
+//console.log(path.resolve('.env'));
 
+const result = dotenv.config();
+/*
+console.log('dotenv result:', result);
+console.log('EMAIL =', process.env.EMAIL);
+console.log('PASSWORD loaded =', !!process.env.PASSWORD);
+*/
 setup('authenticate', async ({ page }) => {
 
   await page.goto('/');
