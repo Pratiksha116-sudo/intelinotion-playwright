@@ -1,5 +1,7 @@
 import { test, expect }from '../fixtures/pageFixture';
 import { generateHSName }from '../utils/commonUtils';
+import fs from 'fs';
+
 
 const elementNames = ['De novo', 'Metadata Sourced variable', 'Varibles', 'Componnet set'];
 
@@ -9,7 +11,10 @@ elementNames.forEach((elementName) => {
         addHSModelPage,
         addPlaceholderPage
     }) => {
-   const hsName = generateHSName();
+   const hsName = fs.readFileSync(
+  'test-data/hsName.txt',
+  'utf-8'
+);
 
    await infoModelPage.open();
 

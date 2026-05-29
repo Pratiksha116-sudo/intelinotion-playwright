@@ -2,7 +2,7 @@ import { test as base, Page } from '@playwright/test';
 
 import { InfoModelPage } from '../pages/InfoModelPage';
 import { AddHSModelPage } from '../pages/AddHSModelPage';
-import { AddPlaceholder } from '../pages/addPlaceholdersPage';
+import { AddPlaceholder } from '../pages/AddPlaceholdersPage';
 
 type PageFixtures = {
 

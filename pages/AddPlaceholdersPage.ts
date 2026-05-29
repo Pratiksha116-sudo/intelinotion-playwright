@@ -6,8 +6,8 @@ export class AddPlaceholder {
     constructor (private page:Page) {}
 
     async rightClickHS(hsName: string) {
-        await this.page.getByText(hsName).click({ button: 'right' });
-    }
+        await this.page.getByRole('treeitem', { name: new RegExp(hsName) }).click({ button: 'right' });
+   }
 
     async selectAddHS() {
         await this.page.getByText('Add Element').click();
