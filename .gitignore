@@ -1,6 +1,5 @@
-
 auth/
 playwright/.auth/
 playwright/.auth-cache/
-.evn
+.env
 testdata/
